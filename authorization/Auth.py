@@ -6,7 +6,7 @@ import json
 import hashlib
 from authorization.Response import Response
 from tacyt.Version import Version
-import Error
+from .Error import Error
 
 class Auth(object):
 
@@ -248,10 +248,10 @@ class Auth(object):
             conn.close()
             ret = Response(json_string=response_data)
 
-        except Exception, e:
-            print "Exception"
-            print e
-            print repr(e)
+        except Exception as e:
+            print ("Exception")
+            print (e)
+            print (repr(e))
             ret = None
 
         return ret
@@ -325,7 +325,9 @@ class Auth(object):
         body_hash = None
 
         if body is not None:
-            body_hash = hashlib.sha1(str(body)).hexdigest()
+            body_hash = hashlib.sha1(str(body).encode('utf-8')).hexdigest()
+            print("body: " + body_hash)
+
             if x_headers is None:
                 x_headers = dict()
             else:
@@ -365,10 +367,10 @@ class Auth(object):
         @return string The serialized headers, an empty string if no headers are passed, or None if there's a problem such as non 11paths specific headers
         '''
         if x_headers:
-            headers = dict((k.lower(), v) for k, v in x_headers.iteritems())
+            headers = dict((k.lower(), v) for k, v in x_headers.items())
 
             serialized_headers = ""
-            for key, value in sorted(headers.iteritems()):
+            for key, value in sorted(headers.items()):
                 if not key.startswith(Auth.X_11PATHS_HEADER_PREFIX.lower()):
                     logging.error("Error serializing headers. Only specific " + Auth.X_11PATHS_HEADER_PREFIX + " headers need to be signed")
                     return None

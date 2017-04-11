@@ -5,8 +5,11 @@ This library offers an API to use Tacyt in a python environment.
 Copyright (C) 2015 Eleven Paths
 '''
 
-from cStringIO import StringIO
-
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
+	
 
 class ExternalApiSearchRequest:
 

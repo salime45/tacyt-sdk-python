@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from ExternalApiFilterRequest import ExternalApiFilterRequest
-from ExternalApiTagRequest import ExternalApiTagRequest
-from Filter import Filter
-from ExternalApiCompareRequest import ExternalApiCompareRequest
-from ExternalApiSearchRequest import ExternalApiSearchRequest
-from Version import Version
-from authorization.Auth import Auth
+from .ExternalApiFilterRequest import ExternalApiFilterRequest
+from .ExternalApiTagRequest import ExternalApiTagRequest
+from .ExternalApiCompareRequest import ExternalApiCompareRequest
+from .ExternalApiSearchRequest import ExternalApiSearchRequest
+from .Version import Version
+from  authorization.Auth import Auth
+from .Filter import Filter
 
 import hashlib
 from os import path
@@ -220,7 +220,7 @@ class TacytApp(Auth):
 
             return self.http_post_file(self.API_UPLOAD_URL, self.authentication_headers_with_body(self.HTTP_METHOD_POST, self.API_UPLOAD_URL, headers, ""), file_stream, file_name, tagName)
 
-        except Exception, e:
-            print repr(e)
+        except Exception as e:
+            print(repr(e))
             return None
         
