@@ -52,7 +52,7 @@ class ExternalApiFilterRequest():
         self.request_type = request_type
         self.content = content
 
-        if page < 1 and page is not None:
+        if page is not None and page < 1 :
             self.page = 1
         else:
             self.page = page
